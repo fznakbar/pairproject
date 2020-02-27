@@ -4,7 +4,7 @@ const controller = require('../controller/userController.js')
 
 // route.get('/',controller.view)
 route.get('/register',controller.registerForm)
-//route.post('/register',controller.register)
+route.post('/register',controller.register)
 route.get('/login',controller.loginForm)
 // route.post('/login',controller.login)
 route.get('/mainpage',controller.mainPage)

@@ -70,6 +70,22 @@ class UserController{
   }
 
   static register(req,res){
+    let obj = {
+      first_name : req.body.firstname,
+      last_name : req.body.lastname,
+      email : req.body.email,
+      role : 'user',
+      username : req.body.username,
+      password : req.body.password
+    }
+    User.create(obj)
+    .then(result=>{
+      let data = 'Congratulation! you can login now!'
+      res.redirect(login)
+    })
+    .catch(err=>{
+      res.send(err)
+    })
 
   }
 
@@ -78,6 +94,17 @@ class UserController{
   }
 
   static login(req,res){
+    User.findOne({where:{name : req.body.username,
+                        password : req.body.password}})
+    .then(data=>{
+      res.send(data)
+      req.session.user = {id : data.id,
+                          role : data.role,
+                          name : data.name}
+    })
+    .catch(err=>{
+      res.send(err)
+    })
 
   }
 
