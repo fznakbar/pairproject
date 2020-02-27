@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Add Destination</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" style="text-align: center; font-family: Lato;">
+        <br>
+        <div class="row">
+         <div class="col">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/movie"><input type="submit" value="Welcome Back Dummy" style="font-family: Lato;"></input></a>
+        </div>
+
+        <div class="col">
+        <h1>Add Destination</h1>
+        <br>
+        <form action = "/user/addDestination" , method ="POST">
+
+            <label for="production">Destination List:</label><br>
+            <select name="prodHouse_id" style="box-sizing: border-box; padding:4px 52px;text-align: center;">
+
+            </select><br>
+
+            <label for="name">Date</label><br>
+            <input type="text"  name="role" style="box-sizing: border-box; padding:4px 20px;text-align: center;"><br>
+
+            <br>
+            <br>
+            <input type="submit" value="Add Destination" style="background-color: rgb(8, 7, 35);
+            border: none;
+            color: white;
+            padding: 14px 26px;
+            text-decoration: none;
+            margin: 2px 2px;
+            cursor: pointer;"></input>
+        </form>
+        </div>    
+
+        <br>
+        <br>
+        <h1 style="text-align: left;">Destination Whislist</h1>
+        <table class="table table-dark" >
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+                <tr>
+                <td>dummy</td>
+                <td>dummy</td>
+                <td>dummy</td>
+              </tr>  
+           
+
+            </tbody>
+          </table>
+
+        </div>
+    </body>
+</html> 

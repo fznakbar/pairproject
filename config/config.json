@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "fznakbar",
+    "username": "postgres",
     "password": "postgres",
     "database": "pairproject",
     "host": "127.0.0.1",
