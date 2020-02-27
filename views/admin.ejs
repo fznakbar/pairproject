@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 style="text-align: center;">This Is NavBar Place</h1>
+    <br>
+    <br>
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    <br><br><br><br>
+    <h2 style="font-family: 'Lato'; font-weight: 300;text-align: center;">Welcome Back !</h2>
+    <h2 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Name Here</h2>
+    </div>
+    <div class="col-sm">
+    <h4 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Add Destination</h4>
+    <div class="container">
+        <form action="/user/form" method="POST">
+            <div class="form-group">
+                <label style="font-family: 'Lato'; font-weight: 400; text-align: center;">Add Destination</label><br>
+                <input type="text" name="destination" style="box-sizing: border-box; padding:4px 20px;text-align: center;"><br>
+            </div>
+            <div class="form-group">
+                <label style="font-family: 'Lato'; font-weight: 400; text-align: center;">Add Price</label><br>
+                <input type="text" name="price" style="box-sizing: border-box; padding:4px 20px;text-align: center;"><br>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Add Destination" style="font-family: 'Lato'; font-weight: 400; text-align: center;"></input>
+        </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Destination Summary</h4><br>
+    <div class="container">
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <th scope="row">
+                            dummy loop
+                        </th>
+                        <td>
+                            dummy loop
+                        </td>
+                        <td>
+                            dummy loop
+                        </td>
+                        <td>
+                            <td><a href="/admin/delete/ data[i]['id']" onclick="return confirm('Are you sure want to delete this?')">
+                                <button type="submit" Style="background-color: rgb(163, 36, 36);
+                                  border: none;
+                                  color: white;
+                                  padding: 0.5px 14px;
+                                  text-decoration: none;
+                                  margin: 1px 1px;
+                                  cursor: pointer;"> Delete 
+                                  </button></a>
+                             
+                            <a href="/admin/edit/data[i]['id']">
+                                <button type="submit" Style="background-color: rgb(41, 134, 131);
+                                  border: none;
+                                  color: white;
+                                  padding: 0.5px 14px;
+                                  text-decoration: none;
+                                  margin: 1px 1px;
+                                  cursor: pointer;"> Edit 
+                                </button></a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Order Summary</h4><br>
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">username</th>
+                    <th scope="col">OrderId</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <th scope="row">
+                            i+1 
+                        </th>
+                        <td>
+                            dummy loop
+                        </td>
+                        <td>
+                            dummy loop
+                        </td>
+                        <td>
+                            dummy loop
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</body>
+</html>

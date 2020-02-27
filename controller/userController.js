@@ -13,7 +13,7 @@ class UserController{
   }
 
   static addForm(req,res){
-    res.render()
+    res.render('admin')
   }
 
   static add(req,res){
@@ -66,7 +66,7 @@ class UserController{
   }
 
   static registerForm(req,res){
-    res.render('signup')
+    res.render('mainUser')
   }
 
   static register(req,res){
@@ -81,7 +81,7 @@ class UserController{
     User.create(obj)
     .then(result=>{
       let data = 'Congratulation! you can login now!'
-      res.redirect(login)
+      res.redirect('/user/login')
     })
     .catch(err=>{
       res.send(err)
