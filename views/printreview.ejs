@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Invoice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h3 style="font-family: Lato;">Name : </h3><h3 style="font-family: Lato;">Name : </h3>
+    <h3 style="font-family: Lato;">Email : </h3><h3 style="font-family: Lato;">Email : </h3>
+    <h3 style="font-family: Lato;">Departure Date : </h3><h3 style="font-family: Lato;"> Departure Date : </h3>
+
+    <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Your List Summary</h4><br>
+    <div class="container">
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i<data.Destinations.length; i++){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>
+                            <%= data.Destinations[i].UserDestination.date.toLocaleString() %>
+                        </td>
+                        <td>
+                            <%= data.Destinations[i].name %>
+                        </td>
+                        <td>
+                            <%= data.Destinations[i].price %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <% function myFunction() { %>
+        <% window.print(); %>
+      <% } %>
+
+      <button onclick="myFunction()">Print this page</button>
+    <br>
+    <br>
+</body>
+</html>
