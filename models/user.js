@@ -14,7 +14,14 @@ module.exports = (sequelize, DataTypes) => {
         username: DataTypes.STRING,
         password: DataTypes.STRING,
         is_logIn: DataTypes.BOOLEAN 
-    }, { sequelize })
+    }, { hooks: {
+        beforeCreate : (instance, options)=>{
+            if(instance.last_name === ''){
+                instance.last_name = instance.first_name
+            }
+        }
+    },
+    sequelize })
 
     User.associate = function(models) {
         User.belongsToMany(models.Destination, { through: models.UserDestination })

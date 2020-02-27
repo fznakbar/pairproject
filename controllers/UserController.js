@@ -2,6 +2,7 @@ const Model = require('../models')
 const Destination = Model.Destination
 const User = Model.User
 const UserDestination = Model.UserDestination
+const numberToRp = require('../helpers/numberToRp')
 
 class UserController {
 
@@ -22,7 +23,7 @@ class UserController {
         User.create(obj)
             .then(result => {
                 let data = 'Congratulation! you can login now!'
-                res.redirect('/user/login')
+                res.redirect('/users/login')
             })
             .catch(err => {
                 res.send(err)
@@ -44,7 +45,15 @@ class UserController {
         .then(data=>{
             User.update({is_logIn : true}, {where : {username:obj.username , password:obj.password}})
             .then(()=>{
+                
+                req.session.user = {id : data.id,
+                    role : data.role,
+                    name : data.name}
+                    console.log(req.session.user)
                 res.redirect(`/user/${data.id}/form`)
+            })
+            .catch(err=>{
+                res.redirect('/users/login')
             })
         })
     }
@@ -63,13 +72,12 @@ class UserController {
                     [Destination, { model: UserDestination }, 'date', 'ASC']
                 ] })
             .then(data => {
-                console.log(UserDestination + '<<<<<<<<<')
                 let totalHarga = 0
                 for (let i = 0; i < data.Destinations.length; i++) {
                     totalHarga += data.Destinations[i].price
                 }
                     // res.send(data)
-                res.render('form', { list: listDestination, data: data, id: id, harga: totalHarga })
+                res.render('form', { list: listDestination, data: data, id: id, harga: totalHarga, numberToRp })
             })
     }
 
@@ -99,6 +107,40 @@ class UserController {
             .catch(err => {
                 res.send(err)
             })
+    }
+
+    static confirm(req,res){
+        let listDestination = null
+        Destination.findAll()
+            .then(data => {
+                listDestination = data
+            })
+            .catch(err => {
+                res.send(err)
+            })
+        let id = req.params.userId
+        UserDestination.update({ confirmed:true }, {where : {UserId:id}})
+        .then(data=>{
+            
+        })
+        User.findByPk(id, { include: { model: Destination }, order: [
+                    [Destination, { model: UserDestination }, 'date', 'ASC']
+                ] })
+            .then(data => {
+                let totalHarga = 0
+                for (let i = 0; i < data.Destinations.length; i++) {
+                    totalHarga += data.Destinations[i].price
+                }
+                    // res.send(data)
+                res.render('printreview', { list: listDestination, data: data, id: id, harga: totalHarga, numberToRp })
+            })
+    }
+
+    static logout(req,res){
+        req.session.destroy(function(err) {
+            // cannot access session here
+            res.redirect('/')
+          })
     }
 }
 

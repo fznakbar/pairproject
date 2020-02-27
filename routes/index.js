@@ -4,27 +4,44 @@ const route = express.Router()
 const UserController = require('../controllers/UserController')
 const AdminController = require('../controllers/AdminController')
 
+const adminRoute = require('./adminRoute')
+const userRoute = require('./userRoute')
+
+
 route.get('/', (req, res)=>{
     res.render('home')
 })
 
-route.get('/user/register', UserController.registerForm)
-route.post('/user/register', UserController.register)
 
-route.get('/user/login', UserController.loginPage)
-route.post('/user/login', UserController.login)
 
-route.get('/user/:userId/form', UserController.form)
-route.post('/user/:userId/form', UserController.addList)
-route.get('/user/delete/:userId/:userDestinationId/', UserController.delete)
+const checkLoginAdmin = (req, res, next)=>{
+    if(!req.session.user){
+        console.log(req.session.user)
+        res.redirect('/admins/login')
+    } else {
+        next()
+    }
+}
 
-route.get('/admin/register', AdminController.registerForm)
-route.post('/admin/register', AdminController.register)
-route.get('/admin/login', AdminController.loginForm)
-route.post('/admin/login', AdminController.login)
+const checkLoginUser = (req, res, next)=>{
+    if(!req.session.user){
+        console.log(req.session.user)
+        res.redirect('/users/login')
+    } else {
+        next()
+    }
+}
 
-route.get('/admin/mainPage', AdminController.mainPage)
-// route.post('/admin/form', AdminController.addList)
-// route.get('/admin/delete/:userDestinationId/', AdminController.delete)
+route.get('/users/register', UserController.registerForm)
+route.post('/users/register', UserController.register)
+
+route.get('/users/login', UserController.loginPage)
+route.post('/users/login', UserController.login)
+
+route.get('/admins/login', AdminController.loginForm)
+route.post('/admins/login', AdminController.login)
+
+route.use('/user', checkLoginUser, userRoute)
+route.use('/admin', checkLoginAdmin, adminRoute)
 
 module.exports = route
