@@ -14,7 +14,7 @@
     <div class="col-sm">
     <br><br><br><br>
     <h2 style="font-family: 'Lato'; font-weight: 300;text-align: center;">Welcome Back !</h2>
-    <h2 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Name Here</h2>
+    <h2 style="font-family: 'Lato'; font-weight: 400; text-align: center;"><%= data.getfullname() %></h2>
     </div>
     <div class="col-sm">
     <h4 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Pick Your Destination</h4>
@@ -31,9 +31,8 @@
                 <% for(let i = 0; i<list.length; i++){ %>
                     <option name= "destinationId" value="<%= list[i].id %>"><%= list[i].name %></option>
                 <% } %>
-                <small id="emailHelp" class="form-text text-muted">We Promise All The Selection Above is an Awesome places.</small>
+                <small id="emailHelp" class="form-text text-muted" style="margin-bottom: 2cm;">We Promise All The Selection Above is an Awesome places.</small>
             </div>
-            <br><br><br>
             <input type="submit" class="btn btn-primary" value="Add List" style="font-family: 'Lato'; font-weight: 400; text-align: center;"></input>
         </form>
         </div>
@@ -49,8 +48,9 @@
             <thead>
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Date (MM/DD/YYYY)</th>
                     <th scope="col">Destination</th>
+                    <th scope="col">Option</th>
                     <th scope="col">Price</th>
                 </tr>
             </thead>
@@ -61,7 +61,7 @@
                             <%= i+1 %>
                         </th>
                         <td>
-                            <%= data.Destinations[i].UserDestination.date.toLocaleString() %>
+                            <%= data.Destinations[i].UserDestination.date.toLocaleDateString() %>
                         </td>
                         <td>
                             <%= data.Destinations[i].name %>
@@ -69,8 +69,17 @@
                         <td>
                             <%= data.Destinations[i].price %>
                         </td>
+                        <td>
+                            <a href="/user/delete/<%= data.Destinations[i].UserDestination.UserId %>/<%= data.Destinations[i].UserDestination.DestinationId %>">Delete</a>
+                        </td>
                     </tr>
                     <% } %>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td><%= harga %></td>
+                    </tr>
             </tbody>
         </table>
     </div>
@@ -84,7 +93,13 @@
                 Unknown
             </div>
             <div class="col">
-                <a class="btn btn-primary" style="color: azure;">See Ticket at Traveloka For Your Selected Date</a>
+                <% if(data.Destinations.length !== 0){ %>
+                    <% let tanggal = data.Destinations[0].UserDestination.date.toLocaleDateString().split('/') %>
+                    <% let tanggalFix = tanggal[1] + '-' + tanggal[0] + '-' + tanggal[2] %>
+                <a href="https://www.traveloka.com/en-id/flight/fullsearch?ap=JKTA.LOP&dt=<%=  tanggalFix %>.NA&ps=1.0.0&sc=ECONOMY" class="btn btn-primary" style="color: azure;" target="blank">See Ticket at Traveloka For Your Selected Date</a>
+                <% } else{ %>
+                    <a href="https://www.traveloka.com/en-id/flight/fullsearch?ap=JKTA.LOP&dt=<%=  10-02-2020 %>.NA&ps=1.0.0&sc=ECONOMY" class="btn btn-primary" style="color: azure;" target="blank">See Ticket at Traveloka</a>
+                <% } %>
             </div>
         </div>
     </div>
