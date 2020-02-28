@@ -1,18 +1,4 @@
 {
-  "development": {
-    "username": "fznakbar",
-    "password": "postgres",
-    "database": "pairproject",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-   },
-   "test": {
-    "username": "fznakbar",
-    "password": "postgres",
-    "database": "pairproject",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-   },
    "production": {
     "username": "mkezojjaiefbqu",
     "password": "772d1e9561f977b229ee7a6df4471d955ef9f2eab6caa660600230aa9b97b0f6",
