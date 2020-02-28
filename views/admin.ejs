@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" style="font-family: Lato; font-weight: 400;" href="#">Wonderful Lombok</a>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="/admin/logout"><li><button  class="btn btn-outline-warning my-2 my-sm-0 nav navbar pull-right" type="submit">Logout</button></li></a> 
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    <br><br><br><br>
+    <h2 style="font-family: 'Lato'; font-weight: 300;text-align: center;">Welcome Back !</h2>
+    <h2 style="font-family: 'Lato'; font-weight: 400; text-align: center;"><%= data.getfullname() %></h2>
+    </div>
+    <div class="col-sm" style="text-align: center;">
+    <h4 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Add Destination</h4>
+    <div class="container">
+        <form action="/admin/<%= data.id %>/addDestination" method="POST">
+            <div class="form-group">
+                <label style="font-family: 'Lato'; font-weight: 400; text-align: center;">Destination</label><br>
+                <input type="text" name="destination" style="box-sizing: border-box; padding:4px 20px;text-align: center;"><br>
+            </div>
+            <div class="form-group">
+                <label style="font-family: 'Lato'; font-weight: 400; text-align: center;">Price</label><br>
+                <input type="text" name="price" style="box-sizing: border-box; padding:4px 20px;text-align: center;"><br>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Add Destination" style="font-family: 'Lato'; font-weight: 400; text-align: center;"></input>
+        </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    <br><br><br>
+
+    <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Destination Summary</h4><br>
+    <div class="container">
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <% for(let i = 0; i<list.length; i++){ %>
+                        <tr>
+                            <td scope="row">
+                                <%= i + 1 %>
+                            </td>
+                            <td scope="row">
+                                <%= list[i].name %>
+                            </td>
+                            <td scope="row">
+                                <%= numberToRp(list[i].price) %>
+                            </td>
+                            <td>
+                                <a href="/admin/delete/<%= data.id %>/<%= list[i].id %>" onclick="return confirm('Are you sure want to delete this?')">
+                                    <button type="submit" Style="background-color: rgb(163, 36, 36);
+                                      border: none;
+                                      color: white;
+                                      padding: 0.5px 14px;
+                                      text-decoration: none;
+                                      margin: 1px 1px;
+                                      cursor: pointer;"> Delete 
+                                      </button></a>
+                                 
+                                <a href="/admin/edit/<%= data.id %>/<%= list[i].id %>">
+                                    <button type="submit" Style="background-color: rgb(41, 134, 131);
+                                      border: none;
+                                      color: white;
+                                      padding: 0.5px 14px;
+                                      text-decoration: none;
+                                      margin: 1px 1px;
+                                      cursor: pointer;"> Edit 
+                                    </button></a>
+                            </td>
+                        </tr>
+                        <% } %>
+            </tbody>
+        </table>
+        <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Order Summary</h4><br>
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <% for(let i = 0; i<order.length; i++){ %>
+                    <tr>
+                        <th scope="row">
+                         <%= i + 1 %> 
+                        </th>
+                        <td>
+                            <%= order[i].User.username %>
+                        </td>
+                        <td>
+                            <%= order[i].User.email%>
+                        </td>
+                        <td>
+                            <a href="mailto:<%= order[i].User.email%>">
+                                <button type="submit" Style="background-color: rgb(163,36,36);
+                                  border: none;
+                                  color: white;
+                                  padding: 0.5px 14px;
+                                  text-decoration: none;
+                                  margin: 1px 1px;
+                                  cursor: pointer;"> Approach via mail 
+                                </button></a>
+                        </td>
+                    </tr>
+                   <% } %>
+             </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</body>
+</html>

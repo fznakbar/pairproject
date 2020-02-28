@@ -1,9 +1,9 @@
 {
-  "development": {
-    "username": "fznakbar",
-    "password": "postgres",
-    "database": "pairproject",
-    "host": "127.0.0.1",
+   "production": {
+    "username": "mkezojjaiefbqu",
+    "password": "772d1e9561f977b229ee7a6df4471d955ef9f2eab6caa660600230aa9b97b0f6",
+    "database": "dd1uvlf2p3duoe",
+    "host": "ec2-3-231-46-238.compute-1.amazonaws.com",
     "dialect": "postgres"
    }
 }

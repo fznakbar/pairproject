@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Form</title>
+    <%- include('partials/bootstrap') %>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" style="font-family: Lato; font-weight: 400;" href="#">Wonderful Lombok</a>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="/user/logout"><li><button  class="btn btn-outline-warning my-2 my-sm-0 nav navbar pull-right" type="submit">Logout</button></li></a> 
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br><br><br>
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    <br><br><br><br>
+    <h2 style="font-family: 'Lato'; font-weight: 300;text-align: center;">Welcome Back !</h2>
+    <h2 style="font-family: 'Lato'; font-weight: 400; text-align: center;"><%= data.getfullname() %></h2>
+    </div>
+    <div class="col-sm">
+    <h4 style="font-family: 'Lato'; font-weight: 400; text-align: center;">Pick Your Destination</h4>
+    <div class="container">
+        <form action="/user/<%= id %>/form" method="POST">
+            <div class="form-group">
+                <label for="exampaleInputEmail1" style="font-family: 'Lato'; font-weight: 400; text-align: center;">Pick Your Date</label>
+                <input type="date" class="form-control" name="date" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1" style="font-family: 'Lato'; font-weight: 400; text-align: center;">Destination List</label>
+                <select name="destinationId" class="form-control" id="exampleFormControlSelect1">
+                <option selected hidden>Select Destination</option>
+                <% for(let i = 0; i<list.length; i++){ %>
+                    <option name= "destinationId" value="<%= list[i].id %>"><%= list[i].name %></option>
+                <% } %>
+                <small id="emailHelp" class="form-text text-muted" style="margin-bottom: 2cm;">We Promise All The Selection Above is an Awesome places.</small>
+            </div>
+            <br><br>
+            <input type="submit" class="btn btn-primary" value="Add List" style="font-family: 'Lato'; font-weight: 400; text-align: center;"></input>
+        </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
+
+    <h4 style="text-align: center;font-family: 'Lato'; font-weight: 400;">Your List Summary</h4><br>
+    <div class="container">
+        <table class="table table-striped" style="font-family: 'Lato'; font-weight: 400;">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Date (MM/DD/YYYY)</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i<data.Destinations.length; i++){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>
+                            <%= data.Destinations[i].UserDestination.date.toLocaleDateString() %>
+                        </td>
+                        <td>
+                            <%= data.Destinations[i].name %>
+                        </td>
+                        <td>
+                            <%= numberToRp(data.Destinations[i].price) %>
+                        </td>
+                        <td>
+                            <a href="/user/delete/<%= data.Destinations[i].UserDestination.UserId %>/<%= data.Destinations[i].UserDestination.DestinationId %>">Delete</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td><%= numberToRp(harga) %></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <a href="/user/<%= id %>/confirmreview" class="btn btn-primary" style="color: azure;" target="blank">Confirm Order</a>
+            </div>
+            <div class="col">
+                <% if(data.Destinations.length !== 0){ %>
+                    <% let tanggal = data.Destinations[0].UserDestination.date.toLocaleDateString().split('/') %>
+                    <% let tanggalFix = tanggal[1] + '-' + tanggal[0] + '-' + tanggal[2] %>
+                <a href="https://www.traveloka.com/en-id/flight/fullsearch?ap=JKTA.LOP&dt=<%=  tanggalFix %>.NA&ps=1.0.0&sc=ECONOMY" class="btn btn-primary" style="color: azure;" target="blank">See Ticket at Traveloka</a>
+                <% } else{ %>
+                    <a href="https://www.traveloka.com/en-id/flight/fullsearch?ap=JKTA.LOP&dt=<%=  10-02-2020 %>.NA&ps=1.0.0&sc=ECONOMY" class="btn btn-primary" style="color: azure;" target="blank">See Ticket at Traveloka</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/bootstrapBawah') %>
+</body>
+
+</html>
