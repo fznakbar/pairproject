@@ -20,9 +20,9 @@ module.exports = {
       confirmed: {
         type: Sequelize.BOOLEAN
       },
-      is_logIn:{
-        type: Sequelize.BOOLEAN
-      },
+      // is_logIn:{
+      //   type: Sequelize.BOOLEAN
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
