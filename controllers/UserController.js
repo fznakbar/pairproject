@@ -33,7 +33,7 @@ class UserController {
                         res.redirect('/users/login')
                     })
                     .catch(err => {
-                        res.send(err)
+                        res.json({ err, message: err.message })
                     })
             });
     }
